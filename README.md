@@ -29,7 +29,7 @@ jersey-example (Work in progress): REST API project created using Jersey.
 * REST API framework: Resteasy, 
 * ORM framework: MyBatis, 
 * Testing Tool: 
-* DI Tool:
+* DI Tool: Dagger, Guice, 
 * Database: 
 
 ## Other planned work
@@ -39,13 +39,17 @@ jersey-example (Work in progress): REST API project created using Jersey.
 4. Add logging support
 5. Different http status & exceptions handling in console app
 6. Create gradle task to support running multiple projects at once
-7. 
+7. Add more unit tests
+8. Add async support
+9. Add health check api support
+10. 
 
 ## Notes
 * All projects are developed using text editor (with plugins/ extensions) and mainly tested using cli (e.g. cURL)
 * Some useful command (gradlew):
   * build
+  * run
   * clean
   * test
-  * bootrun
+  * bootrun (run for Spring Boot)
     

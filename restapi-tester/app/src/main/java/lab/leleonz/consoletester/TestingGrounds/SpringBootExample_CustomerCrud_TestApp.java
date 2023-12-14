@@ -1,7 +1,5 @@
 package lab.leleonz.consoletester.TestingGrounds;
 
-import java.io.IOException;
-
 import lab.leleonz.consoletester.RestApiCaller.CustomerCrudCaller.CustomerCrudBase;
 import lab.leleonz.consoletester.RestApiCaller.CustomerCrudCaller.Models.CreateUpdateCustomerRequest;
 import lab.leleonz.consoletester.RestApiCaller.CustomerCrudCaller.Models.Customer;
@@ -14,7 +12,7 @@ public class SpringBootExample_CustomerCrud_TestApp implements TestingGroundBase
     }
 
     @Override
-    public void run() throws IOException, InterruptedException {
+    public void run() {
         System.out.println("This is a non-interactive testing ground");
         System.out.println("This testing ground will call Customer CRUD rest api in SpringBootExample project");
         System.out.println("All tests will run automatically");

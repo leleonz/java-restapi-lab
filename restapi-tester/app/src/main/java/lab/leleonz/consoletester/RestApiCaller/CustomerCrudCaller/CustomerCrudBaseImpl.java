@@ -30,58 +30,105 @@ public abstract class CustomerCrudBaseImpl implements CustomerCrudBase {
     }
 
     @Override
-    public Customer Create(CreateUpdateCustomerRequest requestObj) throws IOException, InterruptedException {
-        HttpClient client = this.httpClientFactory.createHttpClient();
-        HttpRequest request = this.httpClientFactory.buildHttpPostRequest(requestUrl, objectMapper.writeValueAsString(requestObj));
+    public Customer Create(CreateUpdateCustomerRequest requestObj) {
+        try {
 
-        var response = client.send(request, HttpResponse.BodyHandlers.ofString());
+            HttpClient client = this.httpClientFactory.createHttpClient();
+            HttpRequest request = this.httpClientFactory.buildHttpPostRequest(requestUrl, objectMapper.writeValueAsString(requestObj));
 
-        if(response.statusCode() != 200) return null;
-        return objectMapper.readValue(response.body(), Customer.class);
+            var response = client.send(request, HttpResponse.BodyHandlers.ofString());
 
+            if(response.statusCode() == 200) return objectMapper.readValue(response.body(), Customer.class);
+
+        } catch (IOException ioException) {
+            System.err.println ("Network I/O error - " + ioException);
+        } catch (InterruptedException interruptedException) {
+            System.err.println ("Remote host timed out during read operation");
+        }
+
+        return null;
     }
 
     @Override
-    public List<Customer> ReadAll() throws IOException, InterruptedException {
-        HttpClient client = this.httpClientFactory.createHttpClient();
-        HttpRequest request = this.httpClientFactory.buildHttpGetRequest(requestUrl);
+    public List<Customer> ReadAll() {
+        try {
 
-        var response = client.send(request, HttpResponse.BodyHandlers.ofString());
-        CollectionType customerListType = TypeFactory.defaultInstance().constructCollectionType(List.class, Customer.class);
+            HttpClient client = this.httpClientFactory.createHttpClient();
+            HttpRequest request = this.httpClientFactory.buildHttpGetRequest(requestUrl);
 
-        if(response.statusCode() != 200) return Collections.emptyList();
-        return objectMapper.readValue(response.body(), customerListType);
+            var response = client.send(request, HttpResponse.BodyHandlers.ofString());
+            CollectionType customerListType = TypeFactory.defaultInstance().constructCollectionType(List.class, Customer.class);
+
+            if(response.statusCode() == 200) return objectMapper.readValue(response.body(), customerListType);
+
+        } catch (IOException ioException) {
+            System.err.println ("Network I/O error - " + ioException);
+        } catch (InterruptedException interruptedException) {
+            System.err.println ("Remote host timed out during read operation");
+        }
+
+        return Collections.emptyList();
     }
 
     @Override
-    public Customer Read(Long id) throws IOException, InterruptedException {
-        HttpClient client = this.httpClientFactory.createHttpClient();
-        HttpRequest request = this.httpClientFactory.buildHttpGetRequest(requestUrl + "/" + id);
+    public Customer Read(Long id) {
+        try {
 
-        var response = client.send(request, HttpResponse.BodyHandlers.ofString());
+            HttpClient client = this.httpClientFactory.createHttpClient();
+            HttpRequest request = this.httpClientFactory.buildHttpGetRequest(requestUrl + "/" + id);
 
-        if(response.statusCode() != 200) return null;
-        return objectMapper.readValue(response.body(), Customer.class);
+            var response = client.send(request, HttpResponse.BodyHandlers.ofString());
+
+            if(response.statusCode() == 200) return objectMapper.readValue(response.body(), Customer.class);
+
+        } catch (IOException ioException) {
+            System.err.println ("Network I/O error - " + ioException);
+        } catch (InterruptedException interruptedException) {
+            System.err.println ("Remote host timed out during read operation");
+        }
+
+        return null;
     }
 
     @Override
-    public Customer Update(Long id, CreateUpdateCustomerRequest requestObj) throws IOException, InterruptedException {
-        HttpClient client = this.httpClientFactory.createHttpClient();
-        HttpRequest request = this.httpClientFactory.buildHttpPutRequest(requestUrl + "/" + id, objectMapper.writeValueAsString(requestObj));
+    public Customer Update(Long id, CreateUpdateCustomerRequest requestObj) {
+        try {
 
-        var response = client.send(request, HttpResponse.BodyHandlers.ofString());
+            HttpClient client = this.httpClientFactory.createHttpClient();
+            HttpRequest request = this.httpClientFactory.buildHttpPutRequest(requestUrl + "/" + id, objectMapper.writeValueAsString(requestObj));
 
-        if(response.statusCode() != 200) return null;
-        return objectMapper.readValue(response.body(), Customer.class);
+            var response = client.send(request, HttpResponse.BodyHandlers.ofString());
+
+            if(response.statusCode() == 200) return objectMapper.readValue(response.body(), Customer.class);
+
+        } catch (IOException ioException) {
+            System.err.println ("Network I/O error - " + ioException);
+        } catch (InterruptedException interruptedException) {
+            System.err.println ("Remote host timed out during read operation");
+        }
+
+        return null;
     }
 
     @Override
-    public Boolean Delete(Long id) throws IOException, InterruptedException {
-        HttpClient client = this.httpClientFactory.createHttpClient();
-        HttpRequest request = this.httpClientFactory.buildHttpDeleteRequest(requestUrl + "/" + id);
+    public Boolean Delete(Long id) {
+        try {
 
-        var response = client.send(request, HttpResponse.BodyHandlers.ofString());
-        return response.statusCode() == 204;
+            HttpClient client = this.httpClientFactory.createHttpClient();
+            HttpRequest request = this.httpClientFactory.buildHttpDeleteRequest(requestUrl + "/" + id);
+
+            var response = client.send(request, HttpResponse.BodyHandlers.ofString());
+            return response.statusCode() == 204;
+
+        } catch (IOException ioException) {
+            System.err.println ("Network I/O error - " + ioException);
+        } catch (InterruptedException interruptedException) {
+            System.err.println ("Remote host timed out during read operation");
+        }
+
+        return false;
+
+        
     }
     
 }

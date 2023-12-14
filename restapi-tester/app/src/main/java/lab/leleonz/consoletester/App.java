@@ -3,8 +3,6 @@
  */
 package lab.leleonz.consoletester;
 
-import java.io.IOException;
-
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import lab.leleonz.consoletester.RestApiCaller.NativeHttpClientImpl;
@@ -14,7 +12,7 @@ import lab.leleonz.consoletester.TestingGrounds.SpringBootExample_CustomerCrud_T
 import lab.leleonz.consoletester.TestingGrounds.TestingGroundBase;
 
 public class App {
-    public static void main(String[] args) throws IOException, InterruptedException {
+    public static void main(String[] args) {
         CustomerCrudBase springBootCustomerCrud = new SpringBootExampleCustomerCrud(new NativeHttpClientImpl(), new ObjectMapper());
         TestingGroundBase testingGround = new SpringBootExample_CustomerCrud_TestApp(springBootCustomerCrud);
 
